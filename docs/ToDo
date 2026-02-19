@@ -40,13 +40,13 @@ Absolutely! I’ve taken your spec and broken it down into a **phased TODO list*
 
 ## **Phase 2: Redo Wrong Cards & Session Flow (Medium)**
 
-* [ ] **Complete deck session flow**
+* [x] **Complete deck session flow**
   **Acceptance Criteria:**
 
   * User can navigate through all cards in a deck sequentially.
   * Progress reaches 100% when last card is reviewed.
 
-* [ ] **Redo wrong cards session**
+* [x] **Redo wrong cards session**
   **Acceptance Criteria:**
 
   * After finishing a deck, a “Redo Wrong Cards” option appears if any cards were marked incorrect.

@@ -11,6 +11,8 @@ type SessionState = {
   currentIndex: number
   isFlipped: boolean
   answers: Record<string, AnswerStatus>
+  isRedoSession?: boolean
+  originalAnswers?: Record<string, AnswerStatus>
 }
 
 function App() {
@@ -71,6 +73,40 @@ function App() {
     return Object.keys(session.answers).length === totalCards
   }, [session])
 
+  const progressPercentage = useMemo(() => {
+    if (!session) return 0
+    const totalCards = session.deck.cards.length
+    const answeredCount = Object.keys(session.answers).length
+    return Math.round((answeredCount / totalCards) * 100)
+  }, [session])
+
+  const incorrectCards = useMemo(() => {
+    if (!session) return []
+    return session.deck.cards.filter((card) => session.answers[card.id] === 'incorrect')
+  }, [session])
+
+  const hasIncorrectCards = useMemo(() => {
+    return incorrectCards.length > 0
+  }, [incorrectCards])
+
+  const handleStartRedoWrongCards = () => {
+    if (!session) return
+    const wrongCards = incorrectCards
+    const wrongCardIds = new Set(wrongCards.map((card) => card.id))
+    const redoDeck: Deck = {
+      ...session.deck,
+      cards: wrongCards,
+    }
+    setSession({
+      deck: redoDeck,
+      currentIndex: 0,
+      isFlipped: false,
+      answers: {},
+      isRedoSession: true,
+      originalAnswers: { ...session.answers },
+    })
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -105,10 +141,17 @@ function App() {
               ← All decks
             </button>
             <div className="study-header__meta">
-              <h2 className="section-title">{session.deck.name}</h2>
+              <h2 className="section-title">
+                {session.isRedoSession ? `${session.deck.name} - Review` : session.deck.name}
+              </h2>
               <p className="study-progress">
-                Card {session.currentIndex + 1} of {session.deck.cards.length}
+                Card {session.currentIndex + 1} of {session.deck.cards.length} ({progressPercentage}%)
               </p>
+              {!session.isRedoSession && (
+                <div className="progress-bar">
+                  <div className="progress-bar__fill" style={{ width: `${progressPercentage}%` }}></div>
+                </div>
+              )}
             </div>
           </section>
 
@@ -133,11 +176,25 @@ function App() {
               <div className="session-summary">
                 <h3 className="session-summary__title">Session complete</h3>
                 <p className="session-summary__text">
-                  You have marked each card as correct or needs review. You can go back to choose another deck.
+                  {session.isRedoSession
+                    ? `You've reviewed ${session.deck.cards.length} card${session.deck.cards.length === 1 ? '' : 's'} that needed practice.`
+                    : `You've completed all ${session.deck.cards.length} cards in this deck.`}
                 </p>
-                <button type="button" className="primary-button" onClick={handleBackToDecks}>
-                  Back to decks
-                </button>
+                {!session.isRedoSession && hasIncorrectCards && (
+                  <div className="session-summary__actions">
+                    <p className="session-summary__subtext">
+                      {incorrectCards.length} card{incorrectCards.length === 1 ? '' : 's'} marked as needing review.
+                    </p>
+                    <button type="button" className="primary-button redo-button" onClick={handleStartRedoWrongCards}>
+                      Redo Wrong Cards
+                    </button>
+                  </div>
+                )}
+                <div className="session-summary__actions">
+                  <button type="button" className="primary-button" onClick={handleBackToDecks}>
+                    Back to decks
+                  </button>
+                </div>
               </div>
             )}
           </section>
