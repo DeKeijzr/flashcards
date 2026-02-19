@@ -1,0 +1,123 @@
+Perfect! Thanks for clarifying — this gives me everything I need to draft a complete, structured specification. I’ll also include a suggestion for folder/architecture layout that fits Vite + React + TypeScript.
+
+Here’s a first draft of your **software specification** in Markdown:
+
+---
+
+# Flashcards App Specification (Spanish Learning)
+
+## 1. Vision
+
+Build a lightweight, web-based flashcards application to help users learn Spanish vocabulary. The app should support multiple decks, track progress, and allow focused study on words the user struggles with. Designed for ease-of-use, with a clean, interactive UI using TypeScript, React, and Vite.
+
+---
+
+## 2. Problem Statement
+
+Learning Spanish vocabulary can be challenging, especially when trying to remember which words you know versus which you frequently forget. Traditional static flashcards don’t provide interactive feedback or track performance across different topics. This app aims to:
+
+* Allow users to actively study words by flipping cards.
+* Track mistakes for focused review.
+* Provide multiple study modes, including quizzes.
+* Maintain global statistics without requiring an account.
+
+---
+
+## 3. User Personas
+
+* **Casual Learner:** Wants to expand vocabulary during spare time.
+* **Traveler:** Needs quick practice for real-life scenarios (e.g., Guatemalan slang).
+* **Music Enthusiast:** Learns words from cultural references (e.g., reggaeton vocabulary).
+
+---
+
+## 4. Features
+
+### 4.1 Decks
+
+* Multiple topics/decks (e.g., Food, Travel, Guatemalan slang, Reggaeton words).
+* Each deck contains single Spanish words with optional pronunciation hints.
+* Users can select which deck to study.
+
+### 4.2 Flashcards
+
+* Front: Spanish word.
+* Back: English translation + optional pronunciation.
+* Cards are interactive and can be **flipped**.
+
+### 4.3 Answer Feedback
+
+* After flipping, show two buttons: **Correct** / **Incorrect**.
+* Track which cards the user gets wrong.
+
+### 4.4 Redo Wrong Cards
+
+* After finishing all cards in a deck, the app will allow a **redo session** of only the cards marked as wrong.
+
+### 4.5 Quiz/Test Mode
+
+* Modes: **Multiple Choice** or **Fill-in-the-Blank**.
+* Multiple Choice: 4–5 options per question.
+* Fill-in-the-Blank: leniency in answers (e.g., ignoring accents, minor typos).
+
+### 4.6 Statistics
+
+* Global statistics: total studied cards, correct vs incorrect answers.
+* Deck-specific stats: identify best and worst performing topics.
+* No visualizations initially; just numeric results.
+
+---
+
+## 5. Non-Goals
+
+* No user accounts or authentication (progress stored locally).
+* No real-time collaboration.
+* No gamification or animations beyond card flipping for now.
+
+---
+
+## 6. UX Principles
+
+* Minimalist, distraction-free design.
+* Easy navigation between decks.
+* Immediate feedback after each card.
+* Responsive for desktop and mobile browsers.
+
+---
+
+## 7. Tech Stack
+
+* **Frontend:** React + TypeScript
+* **Build Tool:** Vite
+* **State Management:** React Context or simple useState (local storage persistence)
+* **Styling:** TailwindCSS or CSS Modules (optional)
+* **Storage:** LocalStorage (for progress tracking)
+
+---
+
+## 8. Suggested Folder Structure
+
+```
+src/
+├─ assets/             # images, audio for pronunciation
+├─ components/         # Flashcard, DeckSelector, Quiz, Stats
+├─ pages/              # Home, DeckStudy, QuizMode, Stats
+├─ hooks/              # Custom hooks (e.g., useDeck, useStats)
+├─ context/            # Global app context
+├─ types/              # TypeScript types for Deck, Card, Stats
+├─ utils/              # Helper functions
+├─ App.tsx
+└─ main.tsx
+```
+
+---
+
+## 9. Milestones / Development Phases
+
+1. **Phase 1:** Deck selection, flashcards with flip + correct/incorrect tracking.
+2. **Phase 2:** Redo wrong cards feature.
+3. **Phase 3:** Quiz/Test mode (multiple choice + fill-in-the-blank).
+4. **Phase 4:** Global and per-deck statistics.
+5. **Phase 5:** Polish UI and optional pronunciation audio.
+
+---

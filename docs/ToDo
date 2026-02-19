@@ -1,0 +1,125 @@
+Absolutely! I’ve taken your spec and broken it down into a **phased TODO list** from easy → hard, with checkboxes and clear **acceptance criteria** for each item. This will guide step-by-step implementation in your Vite + React + TypeScript flashcards app.
+
+---
+
+# Flashcards App Implementation TODOs
+
+## **Phase 1: Basic Flashcards & Deck Selection (Easy)**
+
+* [x] **Setup project with Vite + React + TypeScript**
+  **Acceptance Criteria:**
+
+  * `npm create vite@latest` project runs successfully.
+  * App loads in browser without errors.
+
+* [x] **Create data structure for decks and cards**
+  **Acceptance Criteria:**
+
+  * Typescript types for `Deck` and `Card` defined.
+  * At least 2 sample decks with 5 cards each are available in local JSON or TS file.
+
+* [x] **Deck selection page**
+  **Acceptance Criteria:**
+
+  * User sees list of available decks.
+  * Clicking a deck starts a study session for that deck.
+
+* [x] **Flashcard component with flip functionality**
+  **Acceptance Criteria:**
+
+  * Card displays Spanish word on front.
+  * Card flips on click to show English translation (and optional pronunciation).
+
+* [x] **Mark Correct / Incorrect after flipping**
+  **Acceptance Criteria:**
+
+  * Two buttons (“Correct”, “Incorrect”) appear after flip.
+  * Clicking updates the local state to track correct/incorrect status per card.
+
+---
+
+## **Phase 2: Redo Wrong Cards & Session Flow (Medium)**
+
+* [ ] **Complete deck session flow**
+  **Acceptance Criteria:**
+
+  * User can navigate through all cards in a deck sequentially.
+  * Progress reaches 100% when last card is reviewed.
+
+* [ ] **Redo wrong cards session**
+  **Acceptance Criteria:**
+
+  * After finishing a deck, a “Redo Wrong Cards” option appears if any cards were marked incorrect.
+  * Only incorrect cards are shown in this session.
+  * Correct/Incorrect tracking updates appropriately.
+
+* [ ] **Persist progress in LocalStorage**
+  **Acceptance Criteria:**
+
+  * Card statuses (correct/incorrect) are saved locally.
+  * Refreshing the page preserves progress.
+
+---
+
+## **Phase 3: Quiz / Test Mode (Medium-Hard)**
+
+* [ ] **Multiple Choice Quiz**
+  **Acceptance Criteria:**
+
+  * User sees a Spanish word, with 4–5 English options.
+  * Correct answer is tracked, incorrect options randomly pulled from deck.
+  * Minor leniency in answers (e.g., accents ignored).
+
+* [ ] **Fill-in-the-Blank Quiz**
+  **Acceptance Criteria:**
+
+  * User types English translation.
+  * Submission validates answer with leniency (ignoring accents/minor typos).
+  * Feedback is immediate (Correct / Incorrect).
+
+* [ ] **Quiz navigation and completion**
+  **Acceptance Criteria:**
+
+  * User can navigate through all questions in the selected quiz mode.
+  * Score summary displayed at the end.
+
+---
+
+## **Phase 4: Statistics & Deck Performance (Hard)**
+
+* [ ] **Global statistics tracking**
+  **Acceptance Criteria:**
+
+  * Total studied cards, correct vs incorrect answers tracked across all decks.
+  * Data persists in LocalStorage.
+
+* [ ] **Deck-specific statistics**
+  **Acceptance Criteria:**
+
+  * Display best and worst performing decks based on correct percentage.
+  * User can see stats per deck.
+
+---
+
+## **Phase 5: Optional Enhancements (Hard / Nice-to-have)**
+
+* [ ] **Pronunciation audio for Spanish words**
+  **Acceptance Criteria:**
+
+  * Clicking a button plays pronunciation audio.
+  * Audio can be either pre-recorded or TTS.
+
+* [ ] **Responsive UI / mobile-friendly layout**
+  **Acceptance Criteria:**
+
+  * Flashcards, buttons, and quiz pages render properly on mobile devices.
+  * No overflow or broken layout.
+
+* [ ] **Polish UX and visual feedback**
+  **Acceptance Criteria:**
+
+  * Smooth card flip animations.
+  * Buttons highlight on hover.
+  * Clear indication of correct/incorrect feedback.
+
+---
