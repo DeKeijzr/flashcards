@@ -7,6 +7,7 @@ type FlashcardProps = {
   onToggle: () => void
 }
 
+/** Renders a single flipable card: front (Spanish) and back (English + optional pronunciation). */
 export function Flashcard({ card, isFlipped, onToggle }: FlashcardProps) {
   return (
     <div className="flashcard-wrapper">

@@ -1,5 +1,6 @@
 import type { Card, Deck } from '../types/flashcards'
 
+/** Factory for a Card: ensures consistent shape (id, spanish, english, optional pronunciation). */
 const makeCard = (id: string, spanish: string, english: string, pronunciation?: string): Card => ({
   id,
   spanish,
@@ -7,6 +8,7 @@ const makeCard = (id: string, spanish: string, english: string, pronunciation?: 
   pronunciation,
 })
 
+/** Available decks for study (Food, Travel). Loaded once; no persistence of deck list. */
 export const DECKS: Deck[] = [
   {
     id: 'food',

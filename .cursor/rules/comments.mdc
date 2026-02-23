@@ -1,0 +1,8 @@
+---
+description: Add comments when creating or refactoring
+alwaysApply: true
+---
+
+# Comments
+
+- Key parts of the code should have comments explaining what the code does
