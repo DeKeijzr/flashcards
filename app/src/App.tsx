@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 import { DECKS } from './data/decks'
 import { useStudySession } from './hooks/useStudySession'
@@ -9,7 +10,8 @@ import { StudySession } from './components/StudySession'
  * Session state and study flow are delegated to useStudySession.
  */
 function App() {
-  const study = useStudySession()
+  const [level, setLevel] = useState<'easy' | 'hard'>('hard')
+  const study = useStudySession(DECKS)
   const { session, currentCard, hasCompletedDeck, progressPercentage, incorrectCards, hasIncorrectCards } = study
 
   return (
@@ -17,6 +19,29 @@ function App() {
       <header className="app-header">
         <h1 className="app-title">Spanish Flashcards</h1>
         <p className="app-tagline">Practice decks, flip cards, and mark what you know.</p>
+        <div className="level-toggle" aria-label="Difficulty level">
+          <span className="level-toggle__label">Level:</span>
+          <div className="level-toggle__buttons" role="radiogroup" aria-label="Select difficulty level">
+            <button
+              type="button"
+              className={`level-toggle__button ${level === 'easy' ? 'level-toggle__button--active' : ''}`}
+              role="radio"
+              aria-checked={level === 'easy'}
+              onClick={() => setLevel('easy')}
+            >
+              Easy
+            </button>
+            <button
+              type="button"
+              className={`level-toggle__button ${level === 'hard' ? 'level-toggle__button--active' : ''}`}
+              role="radio"
+              aria-checked={level === 'hard'}
+              onClick={() => setLevel('hard')}
+            >
+              Hard
+            </button>
+          </div>
+        </div>
       </header>
 
       {!session && (
@@ -31,6 +56,7 @@ function App() {
           progressPercentage={progressPercentage}
           incorrectCards={incorrectCards}
           hasIncorrectCards={hasIncorrectCards}
+          level={level}
           onFlip={study.flip}
           onAnswer={study.recordAnswer}
           onBackToDecks={study.backToDecks}

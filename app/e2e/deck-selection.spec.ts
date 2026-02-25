@@ -18,16 +18,23 @@ test.describe('Deck Selection', () => {
   test('should display available decks', async ({ page }) => {
     // Check that deck cards are visible
     const deckCards = page.locator('.deck-card')
-    await expect(deckCards).toHaveCount(2) // We have 2 decks in the sample data
+    const count = await deckCards.count()
+    expect(count).toBeGreaterThan(3)
 
     // Check first deck (Food)
     await expect(page.getByText('Comida (Food)')).toBeVisible()
     await expect(page.getByText('Common food-related vocabulary')).toBeVisible()
-    await expect(deckCards.getByText('5 cards').first()).toBeVisible()
+    await expect(deckCards.filter({ hasText: 'Comida (Food)' }).getByText(/cards/)).toBeVisible()
 
     // Check second deck (Travel)
     await expect(page.getByText('Viajes (Travel)')).toBeVisible()
     await expect(page.getByText('Words you will use while traveling')).toBeVisible()
+    await expect(deckCards.filter({ hasText: 'Viajes (Travel)' }).getByText(/cards/)).toBeVisible()
+
+    // Check some specific decks exist
+    await expect(page.getByText('Guatemalan Slang')).toBeVisible()
+    await expect(page.getByText('Reggaeton & Party')).toBeVisible()
+    await expect(page.getByText('Comida (Food)')).toBeVisible()
   })
 
   test('should navigate to study session when clicking a deck', async ({ page }) => {
@@ -36,7 +43,7 @@ test.describe('Deck Selection', () => {
 
     // Should be in study session
     await expect(page.getByRole('heading', { name: 'Comida (Food)' })).toBeVisible()
-    await expect(page.getByText(/Card 1 of 5/)).toBeVisible()
+    await expect(page.getByText(/Card 1 of \d+/)).toBeVisible()
     await expect(page.getByText(/\(0%\)/)).toBeVisible()
   })
 

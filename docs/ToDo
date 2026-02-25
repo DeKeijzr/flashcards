@@ -53,7 +53,7 @@ Absolutely! I’ve taken your spec and broken it down into a **phased TODO list*
   * Only incorrect cards are shown in this session.
   * Correct/Incorrect tracking updates appropriately.
 
-* [ ] **Persist progress in LocalStorage**
+* [x] **Persist progress in LocalStorage**
   **Acceptance Criteria:**
 
   * Card statuses (correct/incorrect) are saved locally.

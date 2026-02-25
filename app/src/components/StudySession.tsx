@@ -10,6 +10,7 @@ export type StudySessionProps = {
   progressPercentage: number
   incorrectCards: Card[]
   hasIncorrectCards: boolean
+  level: 'easy' | 'hard'
   onFlip: () => void
   onAnswer: (status: 'correct' | 'incorrect') => void
   onBackToDecks: () => void
@@ -27,6 +28,7 @@ export function StudySession({
   progressPercentage,
   incorrectCards,
   hasIncorrectCards,
+  level,
   onFlip,
   onAnswer,
   onBackToDecks,
@@ -56,7 +58,7 @@ export function StudySession({
       </section>
 
       <section className="study-area">
-        <Flashcard card={currentCard} isFlipped={session.isFlipped} onToggle={onFlip} />
+        <Flashcard card={currentCard} isFlipped={session.isFlipped} onToggle={onFlip} level={level} />
 
         {session.isFlipped && !hasCompletedDeck && (
           <div className="answer-actions">
